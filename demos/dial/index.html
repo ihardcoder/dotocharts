@@ -4,9 +4,21 @@
     <meta charset="utf-8">
     <title>Dial chart demo</title>
     <script src="../../dest/ykcharts.charts.js" charset="utf-8"></script>
+    <style type="text/css">
+    #container{
+      width:300px;
+      height:500px;
+      margin: 10px auto;
+    }
+    @media screen and (min-width: 700px){
+      #container{
+        width: 400px;
+      }
+    }
+    </style>
   </head>
-  <body>
-    <div id="container" style='width:300px;height:500px;'>
+  <body style='background-color: #3D5865;'>
+    <div id="container" >
 
     </div>
     <script type="text/javascript">
@@ -34,13 +46,27 @@
       ]};
     var dial = new ykcharts.Dial(document.getElementById("container"),{
       conf:{
-        size: 300,
+        // size: 300,
         fontSize: 18,
         fontFamily: 'yahei,sans-serif',
+        fontColor: '#fff',
         responsive: false
       },
       dataset: mockData
     });
+    // 宽度自适应
+    var size = parseInt(d3.select("#container").style('width'));
+    window.onresize = function(e){
+      var _size = parseInt(d3.select("#container").style('width'));
+      if(_size === size){
+        return;
+      }
+      size = _size;
+      console.log('resize');
+      dial.update({
+        size: _size
+      });
+    }
     </script>
   </body>
 </html>

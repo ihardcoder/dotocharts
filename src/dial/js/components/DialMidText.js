@@ -13,6 +13,7 @@ const DialMidText = React.createClass({
 	]).isRequired,
 	mainFontSize: PropTypes.number.isRequired,
 	subFontSize: PropTypes.number.isRequired,
+	fontColor: PropTypes.string.isRequired,
 	mainDy:PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.number
@@ -29,10 +30,10 @@ const DialMidText = React.createClass({
     <g transform={this.props.transform} >
       <text style={{
       	fontSize: this.props.mainFontSize
-      }} textAnchor='middle' y={this.props.mainDy} >{this.props.finalscore}</text>
+      }} textAnchor='middle' y={this.props.mainDy} fill={this.props.fontColor}>{this.props.finalscore}</text>
       <text style={{
       	fontSize: this.props.subFontSize
-      }} textAnchor='middle' y={this.props.subDy} >{_rankText}</text>
+      }} textAnchor='middle' y={this.props.subDy} fill={this.props.fontColor} >{_rankText}</text>
     </g>
     );
   }

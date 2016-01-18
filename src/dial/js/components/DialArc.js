@@ -30,7 +30,14 @@ const DialArc = React.createClass({
       PropTypes.string,
       PropTypes.number
     ]).isRequired,
-    fontSize: PropTypes.number.isRequired
+    fontSize: PropTypes.number.isRequired,
+    fontColor: PropTypes.string.isRequired,
+  },
+  getInitialState() {
+      return {
+          pathArc:'',
+          arcID: 'arc_'+this.props.range+(new Date()).getTime()  
+      };
   },
   componentDidMount(){
     let _arcAniTime = 600,_textAniTime = 300,_tickAniTime=50;
@@ -58,8 +65,6 @@ const DialArc = React.createClass({
   render(){
     let _arc = d3.svg.arc().innerRadius(this.props.radius-this.props.padding-this.props.border).outerRadius(this.props.radius-this.props.padding).startAngle(this.props.startAngle).endAngle(this.props.endAngle);
     let _transform = d3.transform('translate('+this.props.radius+','+this.props.radius+')');
-    let _arcID = 'arc_'+this.props.range+(new Date()).getTime();
-    let __arcID ='#'+_arcID;
     let ticks = [];
     for(let i=0;i<this.props.ticksum;i++){
       let _ref = 'tick_'+i;
@@ -73,14 +78,15 @@ const DialArc = React.createClass({
     return(
       <g transform = {_transform}>
       <path ref='path'
-       id = {_arcID}
+       id = {this.state.arcID}
        d={_arc()}
        fill={this.props.dataset.color}></path> 
       <text ref='text' dx='50%' dy='-10px'textAnchor='end' style={{
         opacity:1,
         fontSize: this.props.fontSize
-      }}>
-       <textPath xlinkHref={__arcID}>{this.props.dataset.name}</textPath>
+      }}
+       fill={this.props.fontColor}>
+       <textPath xlinkHref={'#'+this.state.arcID}>{this.props.dataset.name}</textPath>
       </text>
       {ticks}
       </g>
