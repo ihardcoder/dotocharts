@@ -7,15 +7,14 @@ const DialBox = React.createClass({
       PropTypes.string,
       PropTypes.number
     ]).isRequired,
-    fontSize: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ])
+    fontSize: PropTypes.number.isRequired,
+    fontFamily: PropTypes.string.isRequired
   },
   render(){
     return(
     <svg width={this.props.size} height={this.props.size} style={{
-        fontSize: this.props.fontSize || 'auto'
+        fontSize: this.props.fontSize,
+        fontFamily: this.props.fontFamily
       }}>
       {this.props.children}
     </svg>

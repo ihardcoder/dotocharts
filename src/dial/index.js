@@ -1,4 +1,3 @@
-import './style/index.scss';
 import React from 'react';
 import {render} from 'react-dom';
 import {DialDOM} from './js';
@@ -24,10 +23,10 @@ class Dial {
     let _size = this.conf.size || parseInt(d3.select(this.container).style('width'));
     let _fontSize,_fontFamily;
     if(this.conf.fontSize){
-      _fontSize = this.conf.fontSize;
+      _fontSize = this.conf.fontSize || 12;
     }
     if(this.conf.fontFamily){
-      _fontFamily = this.conf.fontFamily;
+      _fontFamily = this.conf.fontFamily || 'yahei,sans-serif';
     }
     render(
       <DialDOM size={_size} fontSize={_fontSize} fontFamily={_fontFamily} dataset={this.dataset}/>,

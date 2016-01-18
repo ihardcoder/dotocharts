@@ -1,5 +1,5 @@
 import React,{PropTypes} from 'react';
-import d3 from 'd3';
+import d3 from 'ykd3';
 
 // 时刻小圆弧
 const DialTick = React.createClass({
