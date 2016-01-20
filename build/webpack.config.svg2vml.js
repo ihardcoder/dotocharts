@@ -9,9 +9,9 @@ module.exports = {
       loader: 'babel',
       query: {
         presets: ['es2015','stage-0'],
-        plugins: ["transform-object-assign"/*,"transform-es3-member-expression-literals","transform-es3-property-literals",*/]
-            // ['transform-es2015-modules-commonjs', { "loose": true }],
-            // ['transform-es3-modules-literals', {}]]
+        plugins: ["transform-es5-property-mutators","transform-object-assign","transform-es3-member-expression-literals","transform-es3-property-literals",
+            ['transform-es2015-modules-commonjs', { "loose": true }],
+            ['transform-es3-modules-literals', {}]]
       }
     }, {
       test: /\.css$/,
@@ -22,7 +22,7 @@ module.exports = {
     }]
   },
   entry: {
-    'svg2vml': './src/svg2vml/index.js'
+    'svg2vml': ['es5-shim','es5-shim/es5-sham','./src/svg2vml/index.js']
 	},
   output: {
 		path: './dest',
