@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Dial chart demo</title>
-    <script src="../../dest/ykcharts.svg2vml.js" charset="utf-8"></script>
+    <script src='raphael-min.js' type="text/javascript"></script>
+    <script src="../../dest/dialchart.js" charset="utf-8"></script>
     <style type="text/css">
     #container{
       width:300px;
@@ -44,7 +45,7 @@
           color: '#FFEB3B'
         }
       ]};
-    var dial = new ykcharts.Dial(document.getElementById("container"),{
+    var dial = new Dial(document.getElementById("container"),{
       conf:{
         size: 300,
         fontSize: 18,
