@@ -3,22 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>Dial chart demo</title>
-    <script src='raphael-min.js' type="text/javascript"></script>
     <script src="../../dest/dialchart.js" charset="utf-8"></script>
     <style type="text/css">
     #container{
-      width:300px;
-      height:500px;
-      margin: 10px auto;
-    }
-    @media screen and (min-width: 700px){
-      #container{
-        width: 400px;
-      }
+          display: inline-block;
+          border: solid 1px #bbb;
     }
     </style>
   </head>
-  <body style='background-color: #3D5865;'>
+  <body style=''>
     <div id="container" >
 
     </div>
@@ -26,32 +19,34 @@
     // 测试数据
     var mockData = {
       name:'团队效率评估',
-      score: 80,
-      rank: '34%',
+      score: 800,
+      topOf: '88%',
       children:[
         {
-          name: '组织效率',
+          name: '内容质量',
           score: 80,
-          color: '#4CAF50'
+          topOf: '8%',
+          color: '#fc664d'
         },
         {
-          name: '沟通效率',
-          score: 60,
-          color: '#E91E63'
+          name: '营收能力',
+          score: 0,
+          topOf: '0%',
+          link: 'http://www.youku.com',
+          color: '#65c6e3'
         },
         {
-          name: '协作效率',
-          score: 99,
-          color: '#FFEB3B'
+          name: '发行效率',
+          score: 90,
+          topOf: '99%',
+          color: '#eec31f'
         }
       ]};
     var dial = new Dial(document.getElementById("container"),{
       conf:{
-        size: 300,
-        fontSize: 18,
-        fontFamily: 'yahei,sans-serif',
-        fontColor: '#fff',
-        responsive: false
+        size: 200,
+        titleFontColor: '#555',
+        fontFamily: 'yahei,sans-serif'
       },
       dataset: mockData
     });
