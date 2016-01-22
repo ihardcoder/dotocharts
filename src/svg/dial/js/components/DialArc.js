@@ -57,13 +57,13 @@ const DialArc = React.createClass({
     let text = d3.select(this.refs.text);
     text.transition().delay(_arcAniTime).duration(_textAniTime).style('opacity','1');
     // ticks动画
-    let _textShowtime = _arcAniTime/this.props.ticksum;
+    let _tickShowtime = _arcAniTime/this.props.ticksum;
     for (let i = 0; i < this.props.ticksum; i++) {
-      d3.select(findDOMNode(this.refs['tick_' + i])).transition().delay(_textShowtime * i).duration(_textShowtime*2/3).style('opacity', 0.4);
+      d3.select(findDOMNode(this.refs['tick_' + i])).transition().delay(_tickShowtime * i).duration(_tickShowtime*2/3).style('opacity', 0.4);
     }
     let score_ticks_num = Math.floor(this.props.dataset.score*this.props.ticksum/100);
     for(let i=0;i<score_ticks_num;i++){
-      d3.select(findDOMNode(this.refs['tick_'+i])).transition().delay(_arcAniTime+_tickAniTime*i).duration(_tickAniTime).style('opacity',1);
+      d3.select(findDOMNode(this.refs['tick_'+i])).transition().delay(_arcAniTime+_textAniTime+_tickAniTime*i).duration(_tickAniTime).style('opacity',1);
     }
   },
   render(){
