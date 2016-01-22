@@ -36,10 +36,10 @@ module.exports = {
     root: path.join(__dirname, '/src'),
     extensions: ['', '.js', '.css', '.scss'],
     modulesDirectories: ["node_modules"]
-  },
-  plugins: [new webpack.optimize.UglifyJsPlugin({
-    compress: {
-        warnings: false
-    }
-  })]
+  }
+  // plugins: [new webpack.optimize.UglifyJsPlugin({
+  //   compress: {
+  //       warnings: false
+  //   }
+  // })]
 };

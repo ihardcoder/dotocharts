@@ -12,7 +12,7 @@ const DialTick = React.createClass({
   render(){
     let _arc = d3.svg.arc().innerRadius(this.props.radius-15).outerRadius(this.props.radius-5).startAngle(this.props.startAngle).endAngle(this.props.endAngle);
     return(
-      <g style={{opacity:0.4}}>
+      <g style={{opacity:0}}>
         <path ref='tickpath'
          d={_arc()}
          fill={this.props.color}

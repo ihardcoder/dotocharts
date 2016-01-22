@@ -42,24 +42,28 @@ const DialArc = React.createClass({
   componentDidMount(){
     let _arcAniTime = 600,_textAniTime = 300,_tickAniTime=50;
     // path动画
-    // let _endAngle =  this.props.endAngle;
-    // let _arc = d3.svg.arc().innerRadius(this.props.radius-this.props.padding-this.props.border).outerRadius(this.props.radius-this.props.padding).startAngle(this.props.startAngle);
-    // let path = d3.select(this.refs.path);
-    // path.datum({endAngle: this.props.startAngle});
-    // path.transition().duration(_arcAniTime).attrTween('d', function(d){
-    //   let interpolate = d3.interpolate(d.endAngle,_endAngle);
-    //   return function(t){
-    //     d.endAngle = interpolate(t);
-    //     return _arc(d);
-    //   }
-    // });  
-    // //text动画
-    // let text = d3.select(this.refs.text);
-    // text.transition().delay(_arcAniTime).duration(_textAniTime).style('opacity','1');
-    
+    let _endAngle =  this.props.endAngle;
+    let _arc = d3.svg.arc().innerRadius(this.props.radius-this.props.padding-this.props.border).outerRadius(this.props.radius-this.props.padding).startAngle(this.props.startAngle);
+    let path = d3.select(this.refs.path);
+    path.datum({endAngle: this.props.startAngle});
+    path.transition().duration(_arcAniTime).attrTween('d', function(d){
+      let interpolate = d3.interpolate(d.endAngle,_endAngle);
+      return function(t){
+        d.endAngle = interpolate(t);
+        return _arc(d);
+      }
+    });  
+    //text动画
+    let text = d3.select(this.refs.text);
+    text.transition().delay(_arcAniTime).duration(_textAniTime).style('opacity','1');
+    // ticks动画
+    let _textShowtime = _arcAniTime/this.props.ticksum;
+    for (let i = 0; i < this.props.ticksum; i++) {
+      d3.select(findDOMNode(this.refs['tick_' + i])).transition().delay(_textShowtime * i).duration(_textShowtime*2/3).style('opacity', 0.4);
+    }
     let score_ticks_num = Math.floor(this.props.dataset.score*this.props.ticksum/100);
     for(let i=0;i<score_ticks_num;i++){
-      d3.select(findDOMNode(this.refs['tick_'+i])).transition().delay(_textAniTime+_tickAniTime*i).duration(_tickAniTime).style('opacity',1);
+      d3.select(findDOMNode(this.refs['tick_'+i])).transition().delay(_arcAniTime+_tickAniTime*i).duration(_tickAniTime).style('opacity',1);
     }
   },
   render(){
@@ -82,7 +86,7 @@ const DialArc = React.createClass({
        d={_arc()}
        fill={this.props.dataset.color}></path> 
       <text ref='text' dx='50%' dy='-10px'textAnchor='end' style={{
-        opacity:1,
+        opacity:0,
         fontSize: this.props.fontSize
       }}
        fill={this.props.fontColor}>
