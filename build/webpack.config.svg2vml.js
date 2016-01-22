@@ -26,8 +26,8 @@ module.exports = {
 	},
   output: {
 		path: './dest',
-		filename: 'ykcharts.[name].js',
-		library: 'ykcharts',
+		filename: 'dotocharts.[name].js',
+		library: 'dotocharts',
     libraryTarget: 'umd',
     umdNamedDefine: true
 	},

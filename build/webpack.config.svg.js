@@ -9,9 +9,7 @@ module.exports = {
       loader: 'babel',
       query: {
         presets: ['es2015','stage-0','react'],
-        plugins: ["transform-object-assign"/*,"transform-es3-member-expression-literals","transform-es3-property-literals",*/]
-            // ['transform-es2015-modules-commonjs', { "loose": true }],
-            // ['transform-es3-modules-literals', {}]]
+        plugins: ["transform-object-assign"]
       }
     }, {
       test: /\.css$/,
@@ -27,8 +25,8 @@ module.exports = {
 	},
   output: {
 		path: './dest',
-		filename: 'ykcharts.[name].js',
-		library: 'ykcharts',
+		filename: 'dotocharts.[name].js',
+		library: 'dotocharts',
     libraryTarget: 'umd',
     umdNamedDefine: true
 	},
@@ -36,10 +34,10 @@ module.exports = {
     root: path.join(__dirname, '/src'),
     extensions: ['', '.js', '.css', '.scss'],
     modulesDirectories: ["node_modules"]
-  }
-  // plugins: [new webpack.optimize.UglifyJsPlugin({
-  //   compress: {
-  //       warnings: false
-  //   }
-  // })]
+  },
+  plugins: [new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false
+    }
+  })]
 };

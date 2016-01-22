@@ -1,8 +1,14 @@
-# ykcharts
+# dotocharts
 
 基于React构建的visualization charts
 
 ### React与d3版本（主要版本，持续更新）:`/dest/ykcharts.svg.js`
+
+使用npm安装：
+
+```
+npm install dotocharts
+```
 
 构建命令： 
 
