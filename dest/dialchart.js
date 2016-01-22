@@ -72,6 +72,9 @@ Raphael.fn.dialzone = function(centerX, centerY, radius, startAngle, endAngle,ti
 		'fill': fontColor,
 		'font-family': fontFamily
 	}).mouseover(function(){
+		this.attr({
+			'fill': '#c31'
+		});
 		var _circle = _this.circle(centerX, centerY, tooltipRadius).attr({
 			'fill': '#fff',
 			'stroke': '#fff'
@@ -83,6 +86,9 @@ Raphael.fn.dialzone = function(centerX, centerY, radius, startAngle, endAngle,ti
 		}
 		_this.dialInfo(centerX, centerY, score, scoreFontsize,topOf ,infoFontsize,fontFamily);
 	}).mouseout(function(){
+		this.attr({
+			'fill':fontColor
+		});
 		var _circle = _this.circle(centerX, centerY, tooltipRadius).attr({
 			'fill': '#fff',
 			'stroke': '#fff'
@@ -95,7 +101,7 @@ Raphael.fn.dialzone = function(centerX, centerY, radius, startAngle, endAngle,ti
 		_this.dialInfo(centerX, centerY, totalScore, scoreFontsize,totalTopOf ,infoFontsize,fontFamily);
 	});
 	if(score <= 0){
-		var _subinfo = '（未开通）';
+		var _subinfo = '（点此开通）';
 		var _subinfoDX = 0,_subinfoDY = 0;
 		switch(_direction){
 			case 'right':
@@ -139,6 +145,7 @@ Raphael.fn.dialtick = function(centerX, centerY, innerRadius, outerRadius, start
 }
 
 Raphael.fn.dialInfo = function(centerX, centerY, score, scoreFontsize, topOf, infoFontsize,fontFamily){
+	var isMoz = !(navigator.userAgent.indexOf("KHTML") > -1 || navigator.userAgent.indexOf("Konqueror") > -1 || navigator.userAgent.indexOf("AppleWebKit") > -1)&&navigator.userAgent.indexOf('Gecko') > -1;
 	var _infoFontsizeScale = 1.2;
 	// score文案的尺寸
 	var _scoreWidth = score.toString().length*scoreFontsize*0.5, _scoreHeight = scoreFontsize;
@@ -159,7 +166,7 @@ Raphael.fn.dialInfo = function(centerX, centerY, score, scoreFontsize, topOf, in
 	// 计算score的坐标
 	var _scoreX = centerX - _scoreWidth/2-scoreFontsize/10, _scoreY = centerY - _scoreHeight/3 + _translateY ;
 	// 计算score单位的坐标
-	var _scoreUnitX = _scoreX + _scoreWidth + scoreFontsize/10,_scoreUnitY=centerY-_scoreUnitFontsize+_scoreHeight/6+_translateY;
+	var _scoreUnitX = _scoreX + _scoreWidth + (isMoz?scoreFontsize/5: scoreFontsize/10),_scoreUnitY=centerY-_scoreUnitFontsize+(isMoz?_scoreHeight/5:_scoreHeight/6)+_translateY;
 	// info第一行的坐标
 	var _infoLineOneX = centerX  - _infoWidth/2, _infoLineOneY = _scoreY + _scoreHeight/3+_gap;
 	// info第二行分值的坐标
@@ -172,7 +179,8 @@ Raphael.fn.dialInfo = function(centerX, centerY, score, scoreFontsize, topOf, in
 	var _scoreText = this.text(_scoreX, _scoreY, score.toString()).attr({
 		'font-size': scoreFontsize,
 		'text-anchor': 'start',
-		'font-family': fontFamily
+		'font-family': fontFamily,
+		'fill': '#555'
 	});
 	if(Raphael.svg){
 		_scoreText.attr({
@@ -246,7 +254,7 @@ var Dial = function(container, opts) {
 		// 表盘外圈宽度
 		arcWidth: 1,
 		// 刻度与表盘的间距
-		tickGap: 5,
+		tickGap: 8,
 		// 刻度宽度
 		tickWidth: 10,
 		// 刻度个数
@@ -293,8 +301,8 @@ Dial.prototype.init = function() {
 Dial.prototype.generateArcs = function() {
 	var _seperation = this.dataset.children.length;
 	var averageAngle = 360 / _seperation;
-	var maxGap = 5;
-	var step = averageAngle * 0.1 > maxGap ? averageAngle - maxGap : averageAngle * 0.9;
+	var maxGap = 15;
+	var step = averageAngle- maxGap;// * 0.1 > maxGap ? averageAngle - maxGap : averageAngle * 0.9;
 	var rotate = step / 2;
 	// 刻度个数
 	var _ticksum = this.conf.tickSum;
@@ -330,13 +338,13 @@ Dial.prototype.generateArcs = function() {
 		for (var j = 0; j < _ticksum; j++) {
 			if (j + 1 <= _coloredTicksNum) {
 				this.DOM.dialtick(this.conf.centre.x, this.conf.centre.y, this.conf.size / 2 - this.conf.tickGap-this.conf.tickWidth, this.conf.size / 2 - this.conf.tickGap,
-					_startAngle + _tickstep * (j+1/6), _startAngle + _tickstep * (j + 2 / 3+1/6)).attr({
+					_startAngle + _tickstep * (j+1/6), _startAngle + _tickstep * (j + 1 / 2+1/6)).attr({
 					"stroke": '#bbb',
 					"fill": '#bbb'
 				}).animate(_tickAnimation.delay(this.conf.tickAniDelay+this.conf.tickAnitime * j));
 			} else {
 				this.DOM.dialtick(this.conf.centre.x, this.conf.centre.y, this.conf.size / 2 - this.conf.tickGap-this.conf.tickWidth, this.conf.size / 2 - this.conf.tickGap,
-					_startAngle + _tickstep * (j+1/6), _startAngle + _tickstep * (j + 2 / 3+1/6)).attr({
+					_startAngle + _tickstep * (j+1/6), _startAngle + _tickstep * (j + 1 / 2+1/6)).attr({
 					"stroke": '#bbb',
 					"fill": '#bbb'
 				});
