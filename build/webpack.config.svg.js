@@ -20,12 +20,11 @@ module.exports = {
     }]
   },
   entry: {
-		'svg': './src/svg/index.js',
-    'svg2vml': './src/svg2vml/index.js'
+		'charts': './src/index.js'
 	},
   output: {
 		path: './dest',
-		filename: 'dotocharts.[name].js',
+		filename: 'doto.[name].js',
 		library: 'dotocharts',
     libraryTarget: 'umd',
     umdNamedDefine: true
