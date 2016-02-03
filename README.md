@@ -2,7 +2,7 @@
 
 基于React构建的visualization charts
 
-### React与d3版本（主要版本，持续更新）:`/dest/ykcharts.svg.js`
+### React与d3版本（主要版本，持续更新）:`/dest/doto.charts.js`
 
 使用npm安装：
 
@@ -13,12 +13,12 @@ npm install dotocharts
 构建命令： 
 
 ```
-node build/svg.js
+node build/
 ```
 
 > 不兼容IE8及以下版本IE浏览器
 
-### React与Raphael版本(实验性质，不跟进更新):`/dest/ykcharts.svg2vml.js`
+### React与Raphael版本(实验性质，不跟进更新):`/dest/dotocharts.svg2vml.js`
 
 构建命令： 
 
